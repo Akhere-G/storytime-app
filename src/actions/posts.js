@@ -1,18 +1,9 @@
 import * as api from "../api";
 export const actionTypes = {
-  FETCH_ALL: "FETCH_ALL",
   CREATE: "CREATE",
+  FETCH_ALL: "FETCH_ALL",
   UPDATE: "UPDATE",
-};
-
-export const getPosts = () => async dispatch => {
-  try {
-    const { data } = await api.fetchPosts();
-    const action = { type: actionTypes.FETCH_ALL, payload: data };
-    dispatch(action);
-  } catch (error) {
-    console.log(error);
-  }
+  DELETE: "DELETE",
 };
 
 export const createPost = post => async dispatch => {
@@ -25,15 +16,31 @@ export const createPost = post => async dispatch => {
   }
 };
 
+export const getPosts = () => async dispatch => {
+  try {
+    const { data } = await api.fetchPosts();
+    const action = { type: actionTypes.FETCH_ALL, payload: data };
+    dispatch(action);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updatePost = (id, post) => async dispatch => {
   try {
-    console.log("In updateAction");
+    await api.updatePost(id, post);
+    const action = { type: actionTypes.UPDATE, payload: post };
 
-    const { data } = await api.updatePost(id, post);
-    console.log("DATA IS HERE", data);
-    const action = { type: actionTypes.UPDATE, payload: data };
-    console.log("fetched, about to dispatch");
+    dispatch(action);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deletePost = id => async dispatch => {
+  try {
+    await api.deletePost(id);
 
+    const action = { type: actionTypes.DELETE, payload: { _id: id } };
     dispatch(action);
   } catch (error) {
     console.log(error);

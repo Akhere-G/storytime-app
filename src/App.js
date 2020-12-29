@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [currentId, dispatch]);
+  }, [dispatch]);
   return (
     <Container maxWidth='lg'>
       <AppBar className={classes.appBar} position='static' color='inherit'>
@@ -29,21 +29,19 @@ const App = () => {
         />
       </AppBar>
       <Grow in>
-        <Container>
-          <Grid
-            container
-            justify='space-between'
-            alignItems='stretch'
-            spacing={3}
-          >
-            <Grid item xs={12} sm={7}>
-              <Posts currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={5}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
+        <Grid
+          container
+          justify='space-between'
+          alignItems='stretch'
+          spacing={3}
+        >
+          <Grid item xs={12} sm={7}>
+            <Posts currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
-        </Container>
+          <Grid item xs={12} sm={5}>
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
+          </Grid>
+        </Grid>
       </Grow>
     </Container>
   );

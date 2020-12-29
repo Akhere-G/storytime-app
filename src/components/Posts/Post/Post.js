@@ -13,6 +13,8 @@ import moment from "moment";
 
 import useStyles from "./styles";
 
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../actions/posts";
 const Post = ({
   _id,
   selectedFile,
@@ -25,7 +27,8 @@ const Post = ({
   setCurrentId,
 }) => {
   const classes = useStyles({});
-  const tagsString = tags.map(tag => `#${tag}`).join(", ");
+  const tagsString = tags.map(tag => `#${tag}`).join(" ");
+  const dispatch = useDispatch();
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={selectedFile} title={title} />
@@ -58,11 +61,18 @@ const Post = ({
           {message}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.cardActions}>
         <Button size='small' color='primary'>
           <ThumbUpAlt /> Like {likeCount}
         </Button>
-        <Button size='small' style={{ color: "#F50057" }}>
+        <Button
+          onClick={() => {
+            dispatch(deletePost(_id));
+          }}
+          size='small'
+          style={{ color: "#F50057" }}
+        >
+          <Delete fontSize='small' style={{ color: "#F50057" }} />
           Delete
         </Button>
       </CardActions>
