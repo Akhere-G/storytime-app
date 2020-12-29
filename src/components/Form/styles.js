@@ -8,6 +8,7 @@ export default makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
+    borderRadius: 15,
   },
   form: {
     display: "flex",
@@ -24,6 +25,8 @@ export default makeStyles(theme => ({
     marginBottom: 10,
     background: "#3fb550",
     color: "#fff",
+    borderRadius: 15,
+
     "&:hover": {
       background: "#008422",
     },
@@ -32,8 +35,13 @@ export default makeStyles(theme => ({
     marginBottom: 10,
     background: "#3f50b5",
     color: "#fff",
+    borderRadius: 15,
+
     "&:hover": {
       background: "#002984",
     },
+  },
+  buttonClear: {
+    borderRadius: 15,
   },
 }));

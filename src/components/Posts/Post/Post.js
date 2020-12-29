@@ -14,7 +14,7 @@ import moment from "moment";
 import useStyles from "./styles";
 
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 const Post = ({
   _id,
   selectedFile,
@@ -62,8 +62,15 @@ const Post = ({
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size='small' color='primary'>
-          <ThumbUpAlt /> Like {likeCount}
+        <Button
+          onClick={() => {
+            console.log("liked");
+            dispatch(likePost(_id));
+          }}
+          size='small'
+          color='primary'
+        >
+          <ThumbUpAlt /> &nbsp; Like &nbsp; {likeCount}
         </Button>
         <Button
           onClick={() => {
@@ -73,7 +80,7 @@ const Post = ({
           style={{ color: "#F50057" }}
         >
           <Delete fontSize='small' style={{ color: "#F50057" }} />
-          Delete
+          &nbsp; Delete
         </Button>
       </CardActions>
     </Card>

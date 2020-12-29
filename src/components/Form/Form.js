@@ -123,6 +123,7 @@ const Form = ({ currentId, setCurrentId }) => {
         </Button>
         <Button
           onClick={handleClear}
+          className={classes.buttonClear}
           variant='contained'
           color='secondary'
           size='small'
