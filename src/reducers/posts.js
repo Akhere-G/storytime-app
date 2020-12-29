@@ -1,7 +1,6 @@
 import { actionTypes } from "../actions/posts";
 
 const reducer = (posts = [], action) => {
-  console.log("in reducer");
   switch (action.type) {
     case actionTypes.CREATE:
       return [...posts, action.payload];
@@ -19,8 +18,6 @@ const reducer = (posts = [], action) => {
         return post._id !== action.payload._id;
       });
     case actionTypes.LIKE_POST:
-      console.log("In like case in reducer");
-
       return posts.map(post =>
         post._id === action.payload._id ? action.payload : post
       );
