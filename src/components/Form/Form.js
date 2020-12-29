@@ -31,6 +31,7 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId) {
+      console.log("dispatching in form");
       dispatch(updatePost(currentId, postData));
     } else {
       dispatch(createPost(postData));

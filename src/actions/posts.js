@@ -11,7 +11,7 @@ export const getPosts = () => async dispatch => {
     const action = { type: actionTypes.FETCH_ALL, payload: data };
     dispatch(action);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -21,22 +21,23 @@ export const createPost = post => async dispatch => {
     const action = { type: actionTypes.CREATE, payload: data };
     dispatch(action);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
 export const updatePost = (id, post) => async dispatch => {
   try {
-    console.log("trying");
+    console.log("In updateAction");
 
-    const { data } = await api.updatePost(id, post);
-    console.log("did it");
-
+    const res = await api.updatePost(id, post);
+    console.log(res);
+    const data = await res?.data;
+    console.log("about in patch in actions");
     const action = { type: actionTypes.UPDATE, payload: data };
+    console.log("fetched, about to dispatch");
+
     dispatch(action);
   } catch (error) {
-    console.log("Failed");
-
-    console.log(error.message);
+    console.log(error);
   }
 };

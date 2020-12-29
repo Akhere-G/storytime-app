@@ -49,8 +49,11 @@ const Post = ({
           {tagsString}
         </Typography>
       </div>
+      <Typography className={classes.title} variant='h5' gutterBottom>
+        {title}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} variant='h6' gutterBottom>
+        <Typography variant='h6' gutterBottom>
           {message}
         </Typography>
       </CardContent>
