@@ -5,7 +5,7 @@ const reducer = (posts = [], action) => {
     case actionTypes.FETCH_ALL:
       return action.payload;
     case actionTypes.CREATE:
-      return posts;
+      return [...posts, action.payload];
     default:
       return posts;
   }
