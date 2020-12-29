@@ -37,6 +37,7 @@ const Post = ({
         <Button
           style={{ color: "white" }}
           size='small'
+          label='edit'
           onClick={() => {
             setCurrentId(_id);
           }}
@@ -53,7 +54,7 @@ const Post = ({
         {title}
       </Typography>
       <CardContent>
-        <Typography variant='h6' gutterBottom>
+        <Typography variant='body2' gutterBottom>
           {message}
         </Typography>
       </CardContent>

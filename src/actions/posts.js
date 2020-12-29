@@ -29,10 +29,8 @@ export const updatePost = (id, post) => async dispatch => {
   try {
     console.log("In updateAction");
 
-    const res = await api.updatePost(id, post);
-    console.log(res);
-    const data = await res?.data;
-    console.log("about in patch in actions");
+    const { data } = await api.updatePost(id, post);
+    console.log("DATA IS HERE", data);
     const action = { type: actionTypes.UPDATE, payload: data };
     console.log("fetched, about to dispatch");
 
