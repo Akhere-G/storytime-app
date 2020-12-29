@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import useStyles from "./styles";
-import { createPost } from "../../actions/posts";
+import { createPost, updatePost } from "../../actions/posts";
+
 const initialPostData = {
   creator: "",
   title: "",
@@ -12,16 +13,30 @@ const initialPostData = {
   tags: "",
   selectedFile: "",
 };
-
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState(initialPostData);
+  const currentPost = useSelector(state => {
+    return currentId ? state.posts.find(p => p._id === currentId) : null;
+  });
+
+  useEffect(() => {
+    if (currentPost) {
+      setPostData(currentPost);
+    }
+  }, [currentId, currentPost]);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(postData);
-    dispatch(createPost(postData));
+
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
+    handleClear();
+    setCurrentId(null);
   };
 
   const handleClear = () => {
@@ -35,7 +50,9 @@ const Form = () => {
         className={`${classes.form} ${classes.root} `}
         onSubmit={handleSubmit}
       >
-        <Typography variant='h6'>Create a story</Typography>
+        <Typography variant='h6'>
+          {currentId ? "Update" : "Create"} a story
+        </Typography>
 
         <TextField
           name='creator'
@@ -74,7 +91,10 @@ const Form = () => {
           fullWidth
           value={postData.tags}
           onChange={e => {
-            setPostData(prev => ({ ...prev, tags: e.target.value }));
+            setPostData(prev => ({
+              ...prev,
+              tags: e.target.value.split(",").map(t => t.trim()),
+            }));
           }}
         />
         <div className={classes.fileInput}>
@@ -94,7 +114,7 @@ const Form = () => {
           type='submit'
           fullWidth
         >
-          sumbit
+          {currentId ? "UPDATE" : "sumbit"}
         </Button>
         <Button
           onClick={handleClear}
