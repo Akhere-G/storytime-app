@@ -35,6 +35,7 @@ const Post = ({
   const classes = useStyles({});
   const tagsString = tags.map(tag => `#${tag}`).join(" ");
   const dispatch = useDispatch();
+
   return (
     <Card className={`${classes.card} ${isHidden ? classes.hidden : ""} `}>
       <CardMedia className={classes.media} image={selectedFile} title={title} />
