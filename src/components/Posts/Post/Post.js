@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardActions,
@@ -26,11 +26,17 @@ const Post = ({
   likeCount,
   setCurrentId,
 }) => {
+  const [isHidden, setIsHidden] = useState(true);
+
+  useEffect(() => {
+    setIsHidden(false);
+  }, []);
+
   const classes = useStyles({});
   const tagsString = tags.map(tag => `#${tag}`).join(" ");
   const dispatch = useDispatch();
   return (
-    <Card className={classes.card}>
+    <Card className={`${classes.card} ${isHidden ? classes.hidden : ""} `}>
       <CardMedia className={classes.media} image={selectedFile} title={title} />
       <div className={classes.overlay}>
         <Typography variant='h6'>{creator}</Typography>
@@ -74,7 +80,10 @@ const Post = ({
         </Button>
         <Button
           onClick={() => {
-            dispatch(deletePost(_id));
+            setIsHidden(true);
+            setTimeout(() => {
+              dispatch(deletePost(_id));
+            }, 300);
           }}
           size='small'
           style={{ color: "#F50057" }}

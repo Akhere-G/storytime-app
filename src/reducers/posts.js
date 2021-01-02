@@ -18,8 +18,11 @@ const reducer = (posts = [], action) => {
         return post._id !== action.payload._id;
       });
     case actionTypes.LIKE_POST:
+      console.log("liked post in here", action.payload.likeCount);
       return posts.map(post =>
-        post._id === action.payload._id ? action.payload : post
+        post._id === action.payload._id
+          ? { ...post, likeCount: action.payload.likeCount }
+          : post
       );
 
     default:

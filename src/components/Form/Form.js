@@ -107,8 +107,8 @@ const Form = ({ currentId, setCurrentId }) => {
           <FileBase
             type='file'
             multiple={false}
-            onDone={base64 => {
-              setPostData(prev => ({ ...prev, selectedFile: base64.base64 }));
+            onDone={({ base64 }) => {
+              setPostData(prev => ({ ...prev, selectedFile: base64 }));
             }}
           />
         </div>
